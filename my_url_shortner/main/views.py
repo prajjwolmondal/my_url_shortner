@@ -26,7 +26,7 @@ def shortenURL():
     for i in range(0, 6):
         url_key += url_without_special_chars[randint(0, len(url_without_special_chars)-1)]
     UrlList.create(
-        short_code=url_key.capitalize(),
+        short_code=url_key.upper(),
         full_url=url
     )
     return jsonify({'original_url': url, 'key': url_key.upper(), 'url_without_special_chars': url_without_special_chars})
