@@ -44,6 +44,7 @@ docs/_build
 
 # Virtualenvs
 env/
+venv/
 
 # npm
 /node_modules/
@@ -56,3 +57,6 @@ env/
 
 # Development database
 *.db
+
+# VS code
+.vscode/
