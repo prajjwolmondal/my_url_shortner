@@ -12,7 +12,7 @@ from my_url_shortner.database import (
 class UrlList(Model):
     """Main table containing the short URL <-> long URL map"""
 
-    __tablename__ = "UrlList"
+    __tablename__ = "urllist"
     short_code = Column(db.String(6), unique=True, nullable=False, primary_key=True)
     full_url = Column(db.String(80), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)

@@ -18,7 +18,7 @@ import re
 
 blueprint = Blueprint("main", __name__, static_folder="../static")
 
-@blueprint.route('/shortenurl')
+@blueprint.route('/shortenurl', methods=['POST'])
 def shortenURL():
     url_key = ''
     url = request.args.get('url')
@@ -38,3 +38,8 @@ def getAllUrls():
     for url in urls:
         url_list.append(url.convert_to_dict())
     return jsonify(url_list)
+
+@blueprint.route('/url/<short_code>')
+def getFullUrl(short_code):
+    url = UrlList.query.get(short_code)
+    return jsonify(url.convert_to_dict())
