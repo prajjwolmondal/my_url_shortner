@@ -19,27 +19,27 @@ jobs:
       - python/install-deps
       - run: pip install -r requirements/dev.txt
       - python/save-cache
-      - run:
+      - commands:
         # Our primary container isn't MYSQL so run a sleep command until it's ready.
-        name: Waiting for MySQL to be ready
-        command: |
-          for i in `seq 1 10`;
-          do
-            nc -z 127.0.0.1 3306 && echo Success && exit 0
-            echo -n .
-            sleep 1
-          done
-          echo Failed waiting for MySQL && exit 1
-      - run:
-        name: Install MySQL CLI; Import dummy data; run an example query
-        command: |
-          sudo apt-get install default-mysql-client
-          mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD $MYSQL_DATABASE < tests/test_sql.sql
-          mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD --execute="SELECT * FROM $MYSQL_DATABASE.urllist"
-      
-      - run:
-          command: pytest -v
-          name: Test
+          description: "Waiting for MySQL to be ready"
+          steps:
+          - run:
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+          - run:
+            description: Install MySQL CLI; Import dummy data; run an example query
+            command: |
+              sudo apt-get install default-mysql-client
+              mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD $MYSQL_DATABASE < tests/test_sql.sql
+              mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD --execute="SELECT * FROM $MYSQL_DATABASE.urllist"
+          - run:
+            description: "Running the tests"
+            command: pytest -v
 workflows:
   main:
     jobs:
