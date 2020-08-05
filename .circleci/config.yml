@@ -5,6 +5,7 @@ orbs:
 
 jobs:
   build-and-test:
+    context: url_shortner_main_context
     executor: python/default
     steps:
       - checkout
