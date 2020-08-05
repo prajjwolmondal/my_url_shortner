@@ -39,7 +39,7 @@ def getAllUrls():
         url_list.append(url.convert_to_dict())
     return jsonify(url_list)
 
-@blueprint.route('/<short_code>')
+@blueprint.route('/url/<short_code>')
 def getFullUrl(short_code):
     url = UrlList.query.get(short_code)
     return jsonify(url.convert_to_dict())
