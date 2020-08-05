@@ -6,12 +6,37 @@ orbs:
 jobs:
   build-and-test:
     executor: python/default
+    docker:
+      - image: prajjmondal/url_shortner-primary:0.0.1
+      - image: circleci/mysql:8.0.4
+        environment:
+          MYSQL_DATABASE: url_shortcodes
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
     steps:
       - checkout
       - python/load-cache
       - python/install-deps
       - run: pip install -r requirements/dev.txt
       - python/save-cache
+      - run:
+        # Our primary container isn't MYSQL so run a sleep command until it's ready.
+        name: Waiting for MySQL to be ready
+        command: |
+          for i in `seq 1 10`;
+          do
+            nc -z 127.0.0.1 3306 && echo Success && exit 0
+            echo -n .
+            sleep 1
+          done
+          echo Failed waiting for MySQL && exit 1
+      - run:
+        name: Install MySQL CLI; Import dummy data; run an example query
+        command: |
+          sudo apt-get install default-mysql-client
+          mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD $MYSQL_DATABASE < tests/test_sql.sql
+          mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD --execute="SELECT * FROM $MYSQL_DATABASE.urllist"
+      
       - run:
           command: pytest -v
           name: Test
