@@ -30,7 +30,6 @@ jobs:
             echo Failed waiting for MySQL && exit 1
       - run:
           command: |
-            sudo apt-get install default-mysql-client
             mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD $MYSQL_DATABASE < tests/test_sql.sql
             mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD --execute="SELECT * FROM $MYSQL_DATABASE.urllist"
       - run: pytest -v
