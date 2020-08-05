@@ -15,6 +15,7 @@ RUN apt-get install -y \
 
 # For MySQL
 RUN apt-get install python3-dev default-libmysqlclient-dev gcc  -y
+RUN apt-get install -y netcat
 
 WORKDIR /app
 COPY requirements requirements
