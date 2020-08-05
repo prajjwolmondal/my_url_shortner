@@ -15,7 +15,7 @@ jobs:
           MYSQL_PASSWORD: passw0rd
     steps:
       - checkout
-      - python/load-cache
+      # - python/load-cache
       - python/install-deps
       # - run: pip install -r requirements/dev.txt
       - python/save-cache
