@@ -16,8 +16,9 @@ jobs:
     steps:
       - checkout
       - python/load-cache
-      - python/install-deps
-      - run: pip install -r requirements/dev.txt
+      - python/install-deps:
+          dependency-file: "requirements/dev.txt"
+      # - run: pip install -r requirements/dev.txt
       - python/save-cache
       - run:
           command: |
