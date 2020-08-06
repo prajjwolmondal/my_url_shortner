@@ -6,9 +6,10 @@ CREATE TABLE urllist (
     created_at datetime
 );
 
-INSERT INTO urllist
-VALUES (
-    'ULOTIG',
-    'https://github.com/prajjwolmondal/',
-    '2020-07-28 03:50:14.0'
-);
+INSERT INTO url_shortcodes.urllist
+(short_code, full_url, created_at)
+VALUES('Ilammo', 'https://github.com/prajjwolmondal/', '2020-07-28 03:46:12.0');
+
+INSERT INTO url_shortcodes.urllist
+(short_code, full_url, created_at)
+VALUES('ULOTIG', 'https://github.com/prajjwolmondal/', '2020-07-28 03:50:14.0');
