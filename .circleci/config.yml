@@ -18,9 +18,9 @@ jobs:
         command: mysqld --default-authentication-plugin=mysql_native_password --skip-mysqlx
     steps:
       - checkout
-      - python/load-cache
+      # - python/load-cache
       - python/install-deps
-      - python/save-cache
+      # - python/save-cache
       - run:
           command: |
             for i in `seq 1 10`;
