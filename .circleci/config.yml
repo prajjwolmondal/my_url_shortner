@@ -33,7 +33,7 @@ jobs:
             echo Failed waiting for MySQL && exit 1
       - run:
           command: |
-            mysql -h 127.0.0.1 -u circlecirunner testpassword  url_shortcodes < project/tests/test_sql.sql
+            mysql -h 127.0.0.1 -u circlecirunner testpassword  url_shortcodes < tests/test_sql.sql
             mysql -h 127.0.0.1 -u circlecirunner testpassword  --execute="SELECT * FROM url_shortcodes.urllist"
       - run: pytest -v
 workflows:
