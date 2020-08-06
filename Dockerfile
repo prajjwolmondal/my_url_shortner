@@ -13,6 +13,11 @@ RUN apt-get install -y \
     nodejs \
     && apt-get -y autoclean
 
+# For MySQL
+RUN apt-get install python3-dev default-libmysqlclient-dev gcc  -y
+RUN apt-get install -y netcat
+RUN apt-get install -y default-mysql-client
+
 WORKDIR /app
 COPY requirements requirements
 

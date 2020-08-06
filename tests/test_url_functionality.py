@@ -9,11 +9,11 @@ class TestUrlFunctionality:
     """URL fetching, and adding."""
 
     def test_valid_shortcode_returns_valid_status_code(self, testapp):
-        res = testapp.get('/ULOTIG')
+        res = testapp.get('/url/ULOTIG')
         assert res.status_code == 200
 
     def test_valid_shortcode_returns_valid_url(self, testapp):
-        res = testapp.get('/ULOTIG')
+        res = testapp.get('/url/ULOTIG')
         assert res.json['full_url'] == "https://github.com/prajjwolmondal/"
 
     def test_get_all_urls_returns_valid_status_code(self, testapp):
