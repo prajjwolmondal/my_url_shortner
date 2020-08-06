@@ -1,4 +1,4 @@
-[![my_url_shortner](https://circleci.com/gh/prajjwolmondal/my_url_shortner.svg?style=shield)](https://app.circleci.com/pipelines/github/prajjwolmondal/my_url_shortner)
+[![my_url_shortner](https://circleci.com/gh/prajjwolmondal/my_url_shortner.svg?style=shield)](https://app.circleci.com/pipelines/github/prajjwolmondal/my_url_shortner)  [![Known Vulnerabilities](https://snyk.io/test/github/prajjwolmondal/my_url_shortner/badge.svg)](https://snyk.io/test/github/prajjwolmondal/my_url_shortner)
 
 # My URL Shortner
 
