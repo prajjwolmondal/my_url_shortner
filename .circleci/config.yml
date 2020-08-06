@@ -8,7 +8,7 @@ jobs:
     executor: python/default
     docker:
       - image: prajjmondal/url_shortner:0.0.5
-      - image: circleci/mysql:8.0.4
+      - image: circleci/mysql:latest
         environment:
           MYSQL_DATABASE: url_shortcodes
           MYSQL_ROOT_HOST: "%"
