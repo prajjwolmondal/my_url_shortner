@@ -13,6 +13,8 @@ jobs:
           MYSQL_DATABASE: url_shortcodes
           MYSQL_ROOT_HOST: "%"
           MYSQL_ROOT_PASSWORD: enFn8dsmQBi4gkcP
+          MYSQL_USER: circlecirunner
+          MYSQL_PASSWORD: testpassword
     steps:
       - checkout
       # - python/load-cache
@@ -30,8 +32,8 @@ jobs:
             echo Failed waiting for MySQL && exit 1
       - run:
           command: |
-            mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD $MYSQL_DATABASE < tests/test_sql.sql
-            mysql -h 127.0.0.1 -u $MYSQL_USER -$MYSQL_PASSWORD --execute="SELECT * FROM $MYSQL_DATABASE.urllist"
+            mysql -h 127.0.0.1 -u $MYSQL_USER $MYSQL_PASSWORD $MYSQL_DATABASE < tests/test_sql.sql
+            mysql -h 127.0.0.1 -u $MYSQL_USER $MYSQL_PASSWORD --execute="SELECT * FROM $MYSQL_DATABASE.urllist"
       - run: pytest -v
 workflows:
   main:
