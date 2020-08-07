@@ -1,11 +1,13 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@0.2.1
+  python: circleci/python@0.3.2
 
-jobs:
-  build-and-test:
-    executor: python/default
+executors:
+  docker-with-sql:
+    # The primary image is the docker image of the repo and the secondary image is a
+    # mysql server. The two are in a common network where ports exposed on the primary 
+    # container are available on localhost.
     docker:
       - image: prajjmondal/url_shortner:0.1.0
       - image: circleci/mysql:latest
@@ -16,12 +18,11 @@ jobs:
           MYSQL_USER: url_shortner
           MYSQL_PASSWORD: testpassword
         command: mysqld --default-authentication-plugin=mysql_native_password --skip-mysqlx
+
+commands:
+  wait-for-mysql-server:
+    description: "Waiting for the mysql server to startup"
     steps:
-      - checkout
-      # - python/load-cache
-      - python/install-deps
-      # - run: pip install -r requirements/dev.txt
-      - python/save-cache
       - run:
           command: |
             for i in `seq 1 10`;
@@ -31,13 +32,42 @@ jobs:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
+
+  populate-table:
+    description: "Populate the test db with data and print it out"
+    steps:
       - run:
           command: |
             mysql -h 127.0.0.1 -u url_shortner --password=testpassword  url_shortcodes < tests/test_sql.sql
             mysql -h 127.0.0.1 -u url_shortner --password=testpassword  --execute="SELECT * FROM url_shortcodes.urllist"
+
+jobs:
+  build:
+    executor: python/default
+    steps:
+      - checkout
+      # - python/load-cache # Caching gives - Cannot mkdir: Permission denied tar: home/circleci/.local/lib/python3.8/si: exit status 2
+      - python/install-deps
+      # - python/save-cache # No point saving to cache, since I can't load cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    executor: docker-with-sql
+    steps:
+      - attach_workspace:
+          at: .
+      - wait-for-mysql-server
+      - populate-table
       - run: pytest -v
+
 workflows:
   main:
     jobs:
-      - build-and-test:
+      - build
+      - test:
           context: url_shortner_main_context
+          requires:
+            - build
