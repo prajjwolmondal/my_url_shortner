@@ -32,7 +32,8 @@ commands:
               sleep 1
             done
             echo Failed waiting for MySQL && exit 1
-  populate-table-and-print:
+
+  populate-table:
     description: "Populate the test db with data and print it out"
     steps:
       - run:
@@ -59,7 +60,7 @@ jobs:
       - attach_workspace:
           at: .
       - wait-for-mysql-server
-      - populate-table-and-print
+      - populate-table
       - run: pytest -v
 
 workflows:
