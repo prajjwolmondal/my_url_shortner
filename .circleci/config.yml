@@ -39,6 +39,7 @@ jobs:
     docker:
       - image: prajjmondal/url_shortner:0.1.0
     steps:
+      - checkout
       - run: pytest -v
 
 workflows:
@@ -47,5 +48,4 @@ workflows:
       - build:
           context: url_shortner_main_context
       - test:
-          requires:
-            - build
+          context: url_shortner_main_context
