@@ -53,4 +53,6 @@ workflows:
       - build:
           context: url_shortner_main_context
       - test:
+          requires:
+            - build
           context: url_shortner_main_context
