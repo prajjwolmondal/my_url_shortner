@@ -18,9 +18,9 @@ jobs:
         command: mysqld --default-authentication-plugin=mysql_native_password --skip-mysqlx
     steps:
       - checkout
-      - python/load-cache
+      # - python/load-cache # Caching gives - Cannot mkdir: Permission denied tar: home/circleci/.local/lib/python3.8/si: exit status 2
       - python/install-deps
-      - python/save-cache
+      # - python/save-cache # Since I can't load cache, no point saving to cache
       - run:
           command: |
             for i in `seq 1 10`;
