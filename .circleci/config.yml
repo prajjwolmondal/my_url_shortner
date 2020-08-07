@@ -3,9 +3,8 @@ version: 2.1
 orbs:
   python: circleci/python@0.3.2
 
-jobs:
-  build-and-test:
-    executor: python/default
+executors:
+  docker-with-sql:
     docker:
       - image: prajjmondal/url_shortner:0.1.0
       - image: circleci/mysql:latest
@@ -16,6 +15,10 @@ jobs:
           MYSQL_USER: url_shortner
           MYSQL_PASSWORD: testpassword
         command: mysqld --default-authentication-plugin=mysql_native_password --skip-mysqlx
+
+jobs:
+  build-and-test:
+    executor: docker-with-sql
     steps:
       - checkout
       # - python/load-cache # Caching gives - Cannot mkdir: Permission denied tar: home/circleci/.local/lib/python3.8/si: exit status 2
