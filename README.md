@@ -2,7 +2,7 @@
 
 # My URL Shortner
 
-A simple app that shortens URLs, like bit.ly
+A simple app that shortens URLs, like bit.ly (Project is still WIP)
 
 My focus on this project was to try out technologies that I didn't try out in the past. Mainly, I wanted to try out having a project with a CI pipeline that would run tests against the incoming code changes. 
 
