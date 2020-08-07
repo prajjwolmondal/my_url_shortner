@@ -21,7 +21,7 @@ executors:
 
 commands:
   wait-for-mysql-server:
-    description: "Waitinf for the mysql server to startup"
+    description: "Waiting for the mysql server to startup"
     steps:
       - run:
           command: |
@@ -41,13 +41,23 @@ commands:
             mysql -h 127.0.0.1 -u url_shortner --password=testpassword  --execute="SELECT * FROM url_shortcodes.urllist"
 
 jobs:
-  build-and-test:
-    executor: docker-with-sql
+  build:
+    executor: python/default
     steps:
       - checkout
       # - python/load-cache # Caching gives - Cannot mkdir: Permission denied tar: home/circleci/.local/lib/python3.8/si: exit status 2
       - python/install-deps
-      # - python/save-cache # Since I can't load cache, no point saving to cache
+      # - python/save-cache # No point saving to cache, since I can't load cache
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    executor: docker-with-sql
+    steps:
+      - attach_workspace:
+          at: .
       - wait-for-mysql-server
       - populate-table-and-print
       - run: pytest -v
@@ -55,5 +65,8 @@ jobs:
 workflows:
   main:
     jobs:
-      - build-and-test:
+      - build
+      - test:
           context: url_shortner_main_context
+          requires:
+            - build
