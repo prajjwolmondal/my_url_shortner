@@ -3,23 +3,73 @@
 
 {% block content %}
 <div class="container py-5">
-    <h1 class="display-4">About My URL shornter</h1>
-    <div class="row">
-      <div class="col-md-8">
-        <p class="lead">
-          This site was created by <a href="https://github.com/prajjwolmondal/" target="_blank">Prajjwol Mondal </a>
-        </p>
-        <p> 
-          I created this site to practice making a website that had a super simple concept but 
-          was more complete than my previous projects. This meant having unit tests, 
-          a CI pipeline that would ensure the tests were passing before allowing PRs to be 
-          merged, as well as deploying the app to a non-Heroku platform.
-        </p>
-      </div>
-      <div class="col-md-4">
-        <img src="{{ static_url_for('static', filename='build/img/about_me_pic.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
-      </div>
+  <h1 class="display-4">About My URL shortner</h1>
+  <div class="row py-4">
+    <div class="col-md-8">
+      <p> 
+        I created this site to practice making a website that had a super simple concept but 
+        was more complete than my previous projects. This meant having unit tests, 
+        a CI pipeline that would ensure the tests were passing before allowing PRs to be 
+        merged, as well as deploying the app to a non-Heroku platform. 
+      </p>
+      <p class="font-weight-bold">
+        Tech stack used:
+      </p>
+      <ul>
+        <li class="py-2">
+          <a href="https://github.com/cookiecutter-flask/cookiecutter-flask">cookiecutter-flask</a> - 
+          provided a great flask template with all the bells and whistles packaged in.
+        </li>
+        <li class="py-2">
+          <a href="flask.palletsprojects.com/">flask</a> - 
+          the framework of choice for the backend. I started learning flask after I got laid off due to Covid-19 and have found it pretty easy to learn. It doesn't come with a lot of built in functionality, but it has great support for extensions. I found 
+        </li>
+        <li class="py-2">
+          <a href="https://www.mysql.com/">MySQL</a> - 
+          the database of choice for this project. I've used MySQL in university, as well as at my job at Ritual so I'm quite comfortable with writing sql queries, however one aspect I wasn't very familiar with was setting up a MySQL server and deploying it. Last time I tried, I found it very complicated and annoying(on windows at least) so I just ended up going with MongoDB since I didn't have to worry about hosting it
+        </li>
+        <li class="py-2">
+          <a href="https://docs.pytest.org/en/latest/">pytest</a> - 
+          used for the unit tests. Even though I worked as a Software Engineer in Test at Ritual for roughly two years, I never wrote a single unit test till I got laid off. It was something I really wanted to know before I started a position elsewhere, so these days I'm writing unit tests for any project that I do. pytest came highly recommended on online forums and sites, and so far in my experience it's been pretty easy to grasp. I only have some basic tests written out right now, but am planning on adding some more tests later once the FE is done.
+        </li>
+        <li class="py-2">
+          <a href="circleci.com/">CircleCI</a> - 
+          the CI for this project. I saw CircleCI mentioned on a lot of job postings so I decided to check it out. I love the <a href="https://circleci.com/docs/2.0/ssh-access-jobs/">debug with ssh</a> feature. So far in this project, I've used it twice to quickly figure out what was going wrong with the pipeline. In the end, it took me about 30 tries in a day, to get the initial pipeline up and running but it was great feeling to see commit messages and PRs with a green checkmark next to it. Also having the
+        </li>
+        <li class="py-2">
+          <a href="https://getbootstrap.com/">Bootstrap</a> - 
+          the styling for this site. 
+        </li>
+        <li class="py-2">
+          <a href="https://www.docker.com/">Docker</a> 
+        </li>
+      </ul>
     </div>
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/about_me_pic.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
+    </div>
+  </div>
+
+  <h1 class="display-4">About Me</h1>
+  <p class="lead"> I'm a backend engineer masquerading as a full-stack software engineer</p>
+  <div class="row py-4">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/about_me_pic_2.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
+    </div>
+    <div class="col-md-8">
+      <p>
+        I love to travel and explore new places with my partner and dog. It's something that I wanted to do since I was little and now that I've got my own car and (little bit of) money, I try to travel as much as possible. So far I've been to - Bahamas, Bermuda, Cambodia, Canada, Domican Republic, India, Nepal, Thailand and United States
+      </p>
+      <p>
+        Before Covid-19 hit, I would experience food from different cultures by going to restaurants, festivals, etc. but these days I do that more by myself by tring out recipes that are from different cultures. Since my layoff, I've taken the time to improve my cooking skills. I knew how to cook a handful of dishes, thanks to living away from my parents during university but they weren't anything impressive or particulary tasty if I'm being honest. One of the most intimidating factors when it came to cooking for me was using of the spices. I experimented around with them, finally figured out what to add, when to add it, and how much of it to add. The biggest help in me learning that has been my partner who I've gone to many times when the dish doesn't turn out great, asking her to "fix it". Which is why these days I'm excited to try out new recipes, and re-do them till they turn out perfect rather than tossing it out or just eating the tastless dish. Gone are the days when adding flavor to a dish meant adding Siracha to it.
+      </p>
+      <p>
+        Besides travelling and cooking, I'm also a huge fan of music, movies and tv shows. I probably spend 80% of my time awake listening to music. I mostly listen to hip hop with a healthy dose of rock, R&B, electronic and synthwave. I watch a lot of TV/movies with my partner, we recently just finished another re-watch of Community (cause why not, its streets ahead).
+      </p>
+      <p>
+        I'm also a huge gamer. Since childhood, games have been a huge part of my life and I still enjoy spending large amounts of time on them. Recently, I've gotten really into No Man's Sky and before that I finished Halo 3 on PC. 
+      </p>
+    </div>
+  </div>
 </div>
 {% endblock %}
-
