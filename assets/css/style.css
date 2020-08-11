@@ -88,3 +88,8 @@ footer .footer-nav {
 .homepage-banner {
   background-color: aqua;
 }
+
+.carousel-inner > .carousel-item > img {
+  width:auto;
+  height:500px;
+}
