@@ -3,11 +3,18 @@
 
 {% block content %}
 <div class="container py-5">
-  <h1 class="display-4">Shorten your URLs</h1>    
-  <p>Tired of sending links that take 3 texts to send? Shorten them and send them!</p>
+  <div class="row py-5">
+    <div class="col-md-4">
+      <h1 class="display-4">Shorten your URLs</h1>    
+      <p>Tired of sending links that take 3 texts to send? Shorten them and send them!</p>
+    </div>
+    <div class="col-md-8">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_share_header.svg') }}" class="img-fluid" alt="..." />
+    </div>
+  </div>
 </div>
 
-<div class="container-fluid py-5" style="background-color:black">
+<div class="container-fluid pt-5" style="background-color:black">
   <div class="container">
     <div class="row justify-content-center">
         <form>
@@ -21,6 +28,57 @@
           </div>
         </form>
     </div>
+    <div class="row justify-content-center pt-5">
+      <p>
+        <!-- TODO: Replace this with own svg -->
+        <a href="#homepageContentBoxes">
+          <img src="https://img.icons8.com/fluent/48/000000/expand-arrow.png"/>
+        </a>
+      </p>
+    </div>
   </div>
 </div>
+
+<div class="container pt-5" id="homepageContentBoxes">
+  <div class="row py-5">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_throw_away.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-2"></div>  <!-- Intentionally left empty for spacing -->
+    <div class="col-md-6">
+      <h1 class="display-5">Throw those long URLs away</h1>
+      <p>
+        Which URL would you click on - https://www.canadiantire.ca/en/pdp/black-decker-bdc120vaca-cordless-li-ion-drill-with-100-piece-accessory-kit-0543199p.html?rrec=true#spc <b>or</b> https://bit.ly/2FbL7ZN
+      </p>
+      <p>
+        Need I say more? 
+      </p>
+    </div>
+  </div>
+  <div class="row py-5">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_share.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-2"></div> <!-- Intentionally left empty for spacing -->
+    <div class="col-md-6">
+      <h1 class="display-5">Share shorter links</h1>
+      <p>
+        Share shorter links, leaving more room for text that actually matters
+      </p>
+    </div>
+  </div>
+  <div class="row py-5">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_growth_chart.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-2"></div>  <!-- Intentionally left empty for spacing -->
+    <div class="col-md-6">
+      <h1 class="display-5">Get more shares</h1>
+      <p>
+        Links that are shorter are more likely to be spread around more (supposedly, although no one seems to share anything I send)
+      </p>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
