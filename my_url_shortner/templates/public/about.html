@@ -2,10 +2,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container">
-    <h1 class="mt-5">About</h1>
+<div class="container py-5">
+    <h1 class="display-4">About My URL shornter</h1>
     <div class="row">
-      <p class="lead">This template was created by <a href="http://github.com/sloria/">Steven Loria</a> for use with the <a href="http://github.com/audreyr/cookiecutter/">cookiecutter</a> package by <a href="http://github.com/audreyr/">Audrey Roy</a>.</p>
+      <div class="col-md-8">
+        <p class="lead">
+          This site was created by <a href="https://github.com/prajjwolmondal/" target="_blank">Prajjwol Mondal </a>
+        </p>
+        <p> 
+          I created this site to practice making a website that had a super simple concept but 
+          was more complete than my previous projects. This meant having unit tests, 
+          a CI pipeline that would ensure the tests were passing before allowing PRs to be 
+          merged, as well as deploying the app to a non-Heroku platform.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <img src="{{ static_url_for('static', filename='build/img/about_me_pic.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
+      </div>
     </div>
 </div>
 {% endblock %}
