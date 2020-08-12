@@ -12,16 +12,15 @@
             <h1 class="display-5">Here is your shortened URL: </h1>
         </div>
         <div class="row py-4">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md">
                 <div class="input-group" id="center-text">
-                    <input class="form-control form-control-lg" value="{{ request.args.get('urlKey') }}" size="6" readonly>
+                    <input id="url-to-copy" class="form-control form-control-lg" value="http://127.0.0.1:5000/url/{{ request.args.get('urlKey') }}" size="6" readonly>
                     <div class="input-group-append">
-                        <button class="btn btn-secondary" type="button" id="copy-to-clipboard-btn">Copy link</button>
+                        <!-- TODO: Make this button copy to clipboard -->
+                        <button class="btn btn-secondary" type="button" id="copy-to-clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#url-to-copy">Copy link</button>
                     </div>
                 </div>                
             </div>
-            <div class="col-md-3"></div>
         </div>
         <div class="row pd-4">
             <p class="lead">Go ahead and share! Thanks for using our service 😄🙏🏾</p>

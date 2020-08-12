@@ -55,6 +55,10 @@ textarea {
   justify-content: center;
 }
 
+#homeBanner {
+  background-color:black
+}
+
 /* footer */
 
 footer {
