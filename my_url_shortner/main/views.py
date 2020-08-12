@@ -11,6 +11,7 @@ from flask import (
 )
 
 from my_url_shortner.main.models import UrlList
+from my_url_shortner.main.forms import UrlForm
 
 from random import randint
 
@@ -18,10 +19,9 @@ import re
 
 blueprint = Blueprint("main", __name__, static_folder="../static")
 
-@blueprint.route('/shortenurl', methods=['POST'])
-def shortenURL():
+def shortenURL(url: str) -> dict:
+    current_app.logger.info(f"url passed in - {url}")
     url_key = ''
-    url = request.args.get('url')
     url_without_special_chars = re.sub('(^(https|http)|\W+)', '', url)
     for i in range(0, 6):
         url_key += url_without_special_chars[randint(0, len(url_without_special_chars)-1)]
@@ -29,7 +29,24 @@ def shortenURL():
         short_code=url_key.upper(),
         full_url=url
     )
-    return jsonify({'original_url': url, 'key': url_key.upper(), 'url_without_special_chars': url_without_special_chars})
+    return {'original_url': url, 'key': url_key.upper()}
+
+@blueprint.route("/", methods=["GET", "POST"])
+def home():
+    """Home page."""
+    form = UrlForm(request.form)
+    current_app.logger.info("Hello from the home page!")
+    current_app.logger.info(f"request method - {request.method}")
+    if request.method == "POST":
+        current_app.logger.info(f"url in form- {form.url.data}")
+        urlKey = shortenURL(form.url.data)['key']
+        return redirect(url_for("main.show_success_page", urlKey=urlKey))
+    return render_template("public/home.html", form=form)
+    
+@blueprint.route("/success", methods=["GET"])
+def show_success_page():
+    current_app.logger.info(request.args.get('shortenURL'))
+    return render_template("public/post_shorten.html", keys=request.args.get('urlKey'))
 
 @blueprint.route('/getAllUrls')
 def getAllUrls():

@@ -14,7 +14,7 @@ class UrlList(Model):
 
     __tablename__ = "urllist"
     short_code = Column(db.String(6), unique=True, nullable=False, primary_key=True)
-    full_url = Column(db.String(80), nullable=False)
+    full_url = Column(db.String(120), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __repr__(self) -> str:

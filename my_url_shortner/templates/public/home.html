@@ -17,10 +17,11 @@
 <div class="container-fluid pt-5" style="background-color:black">
   <div class="container">
     <div class="row justify-content-center">
-        <form>
+        <form method="POST" action="" role="form">
+          {{ form.csrf_token }}
           <div class="form-row align-items-center">
             <div class="col-auto my-1">
-              <input class="form-control form-control-lg" type="url" placeholder="Enter a URL to shorten" size="80">
+              {{ form.url(placeholder="Enter a URL to shorten", class_="form-control form-control-lg", size="80") }}
             </div>
             <div class="col-auto my-1">
               <button class="btn btn-primary btn-lg" type="submit">Shorten URL</button>
