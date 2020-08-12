@@ -57,7 +57,6 @@ def getAllUrls():
     return jsonify(url_list)
 
 @blueprint.route('/url/<short_code>')
-def getFullUrl(short_code):
+def redirectToFullUrl(short_code):
     url = UrlList.query.get(short_code)
-    full_url = url.convert_to_dict()['full_url']
-    return redirect(full_url)
+    return redirect(url.convert_to_dict()['full_url'])
