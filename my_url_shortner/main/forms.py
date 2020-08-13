@@ -2,7 +2,7 @@
 """Main form."""
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 
 from my_url_shortner.user.models import User
 
@@ -10,7 +10,7 @@ from my_url_shortner.user.models import User
 class UrlForm(FlaskForm):
     """Form to submit requests to shorten URL."""
 
-    url = StringField("Full URL", validators=[DataRequired()])
+    url = StringField("Full URL", validators=[DataRequired(), Length(max=120)])
 
     def __init__(self, *args, **kwargs):
         """Create instance."""

@@ -17,7 +17,7 @@ class TestUrlFunctionality:
 
     def test_invalid_shortcode_returns_invalid_status_code(self, testapp):
         """You should get 404 error when hitting an invalid url shortcode"""
-        res = testapp.get('/url/CIRCLES')
+        res = testapp.get('/url/CIRCLES', expect_errors=True)
         assert res.status_code == 404
 
     def test_valid_shortcode_returns_valid_url(self, testapp):
@@ -43,3 +43,5 @@ class TestUrlFunctionality:
         search_form['url'] = "https://docs.pylonsproject.org/projects/webtest/en/latest/api.html"
         res = search_form.submit().follow()
         assert len(UrlList.query.all()) == old_numb_of_urls + 1
+
+        

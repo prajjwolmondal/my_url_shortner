@@ -38,7 +38,7 @@ def home():
     form = UrlForm(request.form)
     current_app.logger.info("Hello from the home page!")
     current_app.logger.info(f"request method - {request.method}")
-    if request.method == "POST":
+    if request.method == "POST" and form.validate_on_submit():
         current_app.logger.info(f"url in form- {form.url.data}")
         urlKey = shortenURL(form.url.data)['key']
         return redirect(url_for("main.show_success_page", urlKey=urlKey))
