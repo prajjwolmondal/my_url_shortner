@@ -16,7 +16,7 @@
 
 <div class="container-fluid pt-5" id="homeBanner">
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pt-3">
         <form  id="urlForm" class="form form-url" method="POST" action="" role="form">
           {{ form.csrf_token }}
           <div class="form-row align-items-center">
@@ -31,9 +31,11 @@
     </div>
     <div class="row justify-content-center pt-5">
       <p>
-        <!-- TODO: Replace this with own svg -->
         <a href="#homepageContentBoxes">
-          <img src="https://img.icons8.com/fluent/48/000000/expand-arrow.png"/>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="80" height="80" viewBox="0 0 24 24" stroke-width="3" stroke="#FFFFFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z"/>
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </a>
       </p>
     </div>
