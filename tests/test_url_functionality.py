@@ -15,6 +15,11 @@ class TestUrlFunctionality:
         res = testapp.get('/url/ULOTIG')
         assert res.status_code == 302
 
+    def test_invalid_shortcode_returns_invalid_status_code(self, testapp):
+        """You should get 404 error when hitting an invalid url shortcode"""
+        res = testapp.get('/url/CIRCLES')
+        assert res.status_code == 404
+
     def test_valid_shortcode_returns_valid_url(self, testapp):
         """You should get redirected to the correct URL when hitting a url shortcode"""
         res = testapp.get('/url/ULOTIG', status=[302])

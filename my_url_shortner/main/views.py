@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import (
+    abort,
     Blueprint,
     current_app,
     flash,
@@ -59,4 +60,6 @@ def getAllUrls():
 @blueprint.route('/url/<short_code>')
 def redirectToFullUrl(short_code):
     url = UrlList.query.get(short_code)
+    if url is None:
+        abort(404) 
     return redirect(url.convert_to_dict()['full_url'])
