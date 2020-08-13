@@ -47,6 +47,18 @@ textarea {
           box-sizing: border-box;
 }
 
+#center-text > input {
+  text-align: center;
+}
+
+#center-text {
+  justify-content: center;
+}
+
+#homeBanner {
+  background-color:black
+}
+
 /* footer */
 
 footer {

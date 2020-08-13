@@ -1,0 +1,37 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row py-5">
+    <div class="col-md-6">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_social_share.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <h1 class="display-5">Here is your shortened URL: </h1>
+        </div>
+        <div class="row py-4">
+            <div class="col-md">
+                <div class="input-group" id="center-text">
+                    <input id="url-to-copy" class="form-control form-control-lg" value="http://127.0.0.1:5000/url/{{ request.args.get('urlKey') }}" size="6" readonly>
+                    <div class="input-group-append">
+                        <!-- TODO: Make this button copy to clipboard -->
+                        <button class="btn btn-secondary" type="button" id="copy-to-clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#url-to-copy">Copy link</button>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div class="row pd-4">
+            <p class="lead">Go ahead and share! Thanks for using our service 😄🙏🏾</p>
+        </div>
+        <div class="row pd-4 mx-auto" id="center-text">
+            <a href="{{ url_for('main.home') }}">
+                Shorten another URL?
+            </a>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

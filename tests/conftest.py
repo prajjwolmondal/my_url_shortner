@@ -36,13 +36,20 @@ def db(app):
     """Create database for the tests."""
     _db.app = app
     with app.app_context():
+        _db.session.remove()
+        _db.drop_all()
         _db.create_all()
 
     yield _db
 
-    # Explicitly close DB connection
-    _db.session.close()
+    _db.session.remove()
     _db.drop_all()
+
+    ## This dispose() call is needed to avoid the DB locking
+    ## between tests.
+    ## Thanks to:
+    ## http://stackoverflow.com/a/18293157/2066849
+    _db.get_engine(_db.app).dispose()
 
 
 @pytest.fixture

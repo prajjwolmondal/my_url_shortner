@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `urllist`;
 
 CREATE TABLE urllist (
     short_code varchar(6),
-    full_url varchar(80),
+    full_url varchar(120),
     created_at datetime
 );
 
