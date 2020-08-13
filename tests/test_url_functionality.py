@@ -11,29 +11,30 @@ class TestUrlFunctionality:
     """URL fetching, and adding."""
 
     def test_valid_shortcode_returns_valid_status_code(self, testapp):
+        """You should get redirected when hitting a url shortcode"""
         res = testapp.get('/url/ULOTIG')
         assert res.status_code == 302
 
-    # TODO: Fix test
     def test_valid_shortcode_returns_valid_url(self, testapp):
-        res = testapp.get('/url/ULOTIG').follow()
-        print(f"request_path: {request.path}")
-        assert request.path== "https://github.com/prajjwolmondal/"
+        """You should get redirected to the correct URL when hitting a url shortcode"""
+        res = testapp.get('/url/ULOTIG', status=[302])
+        assert res.headers['Location'] == "https://github.com/prajjwolmondal/"
 
     def test_get_all_urls_returns_valid_status_code(self, testapp):
+        """200 status code returned when fetching all URLs"""
         res = testapp.get('/getAllUrls')
         assert res.status_code == 200
 
     def test_get_all_urls_returns_more_than_one_url(self, testapp):
+        """More than 1 URL returned when fetching all URLs"""
         res = testapp.get('/getAllUrls') 
         assert len(res.json) > 1
 
-    # TODO: Fix test
     def test_url_is_added_to_db(self, testapp):
-        urls = UrlList.query.all()
-        print(f"urls: {urls}")
-        db_length_before = len(urls)
-        print(f"db_length_before: {db_length_before}")
-        res = testapp.get(url_for("main.home")).follow()
-        print(f"res: {res.forms}")
-        assert False
+        """Submitting a new URL via the homepage form, adds it to the DB"""
+        old_numb_of_urls = len(UrlList.query.all())
+        res = testapp.get('/')
+        search_form = res.forms['urlForm']
+        search_form['url'] = "https://docs.pylonsproject.org/projects/webtest/en/latest/api.html"
+        res = search_form.submit().follow()
+        assert len(UrlList.query.all()) == old_numb_of_urls + 1
