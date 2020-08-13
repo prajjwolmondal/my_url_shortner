@@ -1,35 +1,84 @@
 
 {% extends "layout.html" %}
+
 {% block content %}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-    <div class="container">
-    
-      <h1 class="display-3">Welcome to My URL Shortner</h1>
-    
-      <p>This is a starter Flask template. It includes Bootstrap 4, jQuery 3, Flask-SQLAlchemy, WTForms, and various testing utilities out of the box.</p>
-      <p><a href="https://github.com/cookiecutter-flask/cookiecutter-flask" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+<div class="container py-5">
+  <div class="row py-5">
+    <div class="col-md-4">
+      <h1 class="display-4">Shorten your URLs</h1>    
+      <p>Tired of sending links that take 3 texts to send? Shorten them and send them!</p>
     </div>
-</div><!-- /.jumbotron -->
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-4">
-      <h2><i class="fa fa-code"></i> Bootstrap 4</h2>
-      <p>Sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.</p>
-      <p><a class="btn btn-outline-secondary" href="http://getbootstrap.com/">Official website &raquo;</a></p>
+    <div class="col-md-8">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_share_header.svg') }}" class="img-fluid" alt="..." />
     </div>
-    <div class="col-lg-4">
-      <h2><i class="fa fa-flask"></i> SQLAlchemy</h2>
-      <p>SQLAlchemy is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.</p>
-      <p><a href="http://www.sqlalchemy.org/" class="btn btn-outline-secondary">Official website &raquo;</a></p>
-   </div>
-    <div class="col-lg-4">
-      <h2><i class="fa fa-edit"></i> WTForms</h2>
-      <p>WTForms is a flexible forms validation and rendering library for python web development.</p>
-      <p><a href="http://wtforms.simplecodes.com/" class="btn btn-outline-secondary">Official website &raquo;</a></p>
-    </div>
-  </div><!-- /.row -->
+  </div>
 </div>
-{% endblock %}
 
+<div class="container-fluid pt-5" style="background-color:black">
+  <div class="container">
+    <div class="row justify-content-center">
+        <form>
+          <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+              <input class="form-control form-control-lg" type="url" placeholder="Enter a URL to shorten" size="80">
+            </div>
+            <div class="col-auto my-1">
+              <button class="btn btn-primary btn-lg" type="submit">Shorten URL</button>
+            </div>
+          </div>
+        </form>
+    </div>
+    <div class="row justify-content-center pt-5">
+      <p>
+        <!-- TODO: Replace this with own svg -->
+        <a href="#homepageContentBoxes">
+          <img src="https://img.icons8.com/fluent/48/000000/expand-arrow.png"/>
+        </a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container pt-5" id="homepageContentBoxes">
+  <div class="row py-5">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_throw_away.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-2"></div>  <!-- Intentionally left empty for spacing -->
+    <div class="col-md-6">
+      <h1 class="display-5">Throw those long URLs away</h1>
+      <p>
+        Which URL would you click on - https://www.canadiantire.ca/en/pdp/black-decker-bdc120vaca-cordless-li-ion-drill-with-100-piece-accessory-kit-0543199p.html?rrec=true#spc <b>or</b> https://bit.ly/2FbL7ZN
+      </p>
+      <p>
+        Need I say more? 
+      </p>
+    </div>
+  </div>
+  <div class="row py-5">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_share.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-2"></div> <!-- Intentionally left empty for spacing -->
+    <div class="col-md-6">
+      <h1 class="display-5">Share shorter links</h1>
+      <p>
+        Share shorter links, leaving more room for text that actually matters
+      </p>
+    </div>
+  </div>
+  <div class="row py-5">
+    <div class="col-md-4">
+      <img src="{{ static_url_for('static', filename='build/img/undraw_growth_chart.svg') }}" class="img-fluid" alt="..." />
+    </div>
+    <div class="col-md-2"></div>  <!-- Intentionally left empty for spacing -->
+    <div class="col-md-6">
+      <h1 class="display-5">Get more shares</h1>
+      <p>
+        Links that are shorter are more likely to be spread around more (supposedly, although no one seems to share anything I send)
+      </p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
