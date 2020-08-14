@@ -26,15 +26,19 @@
         </li>
         <li class="py-2">
           <a href="https://www.mysql.com/">MySQL</a> - 
-          the database of choice for this project. I've used MySQL in university, as well as at my job at Ritual so I'm quite comfortable with writing sql queries, however one aspect I wasn't very familiar with was setting up a MySQL server and deploying it. Last time I tried, I found it very complicated and annoying(on windows at least) so I just ended up going with MongoDB since I didn't have to worry about hosting it
+          the database of choice for this project. I've used MySQL in university, as well as at my job at Ritual so I'm quite comfortable with writing sql queries, however one aspect I wasn't very familiar with was setting up a MySQL server and deploying it. Last time I tried, I found it very complicated and annoying(on windows at least) so I just ended up going with MongoDB since I didn't have to worry about hosting it. This time around I hosted a local MySQL server for dev use, and I used <a href="https://devcenter.heroku.com/articles/cleardb">ClearDB</a> for the production DB.
         </li>
         <li class="py-2">
-          <a href="https://docs.pytest.org/en/latest/">pytest</a> - 
-          used for the unit tests. Even though I worked as a Software Engineer in Test at Ritual for roughly two years, I never wrote a single unit test till I got laid off. It was something I really wanted to know before I started a position elsewhere, so these days I'm writing unit tests for any project that I do. pytest came highly recommended on online forums and sites, and so far in my experience it's been pretty easy to grasp. I only have some basic tests written out right now, but am planning on adding some more tests later once the FE is done.
+          <a href="https://docs.pytest.org/en/latest/">pytest</a> and <a href="https://docs.pylonsproject.org/projects/webtest/en/latest/index.html"> WebTest </a>- 
+          used for the unit tests. Even though I worked as a Software Engineer in Test at Ritual for roughly two years, I never wrote a single unit test. It was something I really wanted to know before I started a position elsewhere, so these days I'm writing unit tests for any project that I do. pytest came highly recommended on online forums and sites, and so far in my experience it's been pretty easy to grasp. I only have some basic tests written out right now, but am planning on adding some more tests later once the FE is done, and the app is deployed.
         </li>
         <li class="py-2">
           <a href="circleci.com/">CircleCI</a> - 
-          the CI for this project. I saw CircleCI mentioned on a lot of job postings so I decided to check it out. I love the <a href="https://circleci.com/docs/2.0/ssh-access-jobs/">debug with ssh</a> feature. So far in this project, I've used it twice to quickly figure out what was going wrong with the pipeline. In the end, it took me about 30 tries in a day, to get the initial pipeline up and running but it was great feeling to see commit messages and PRs with a green checkmark next to it. Will be adding more to the pipelines, such as lint checking, deploying to AWS/Azure/GCP, having auto tags when master is updated, etc.
+          the CI for this project. I saw CircleCI mentioned on a lot of job postings so I decided to check it out. I love the <a href="https://circleci.com/docs/2.0/ssh-access-jobs/">debug with ssh</a> feature. So far in this project, I've used it twice to quickly figure out what was going wrong with the pipeline. In the end, it took me about 30 tries in a day, to get the initial pipeline up and running but it was great feeling to see commit messages and PRs with a green checkmark next to it. Will be adding more to the pipelines, such as lint checking, deploying to Heroku, having auto tags when master is updated, etc.
+        </li>
+        <li class="py-2">
+          <a href="https://www.heroku.com/">Heroku</a> - 
+          I've hosted this site on Heroku. I chose Heroku because I had deployed an app there previously, and found it easy to use. Their free tier comes with most of the basi
         </li>
         <li class="py-2">
           <a href="https://getbootstrap.com/">Bootstrap</a> - 
@@ -50,14 +54,16 @@
       </ul>
     </div>
     <div class="col-md-4">
-      <img src="{{ static_url_for('static', filename='build/img/about_me_pic.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
+      <div class="d-none d-md-block"> <!-- Hiding image on screens smalled than md -->
+        <img src="{{ static_url_for('static', filename='build/img/about_me_pic.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
+      </div>
     </div>
   </div>
 
   <h1 class="display-4">About Me</h1>
   <p class="lead"> I'm a backend engineer masquerading as a full-stack software engineer</p>
   <div class="row py-4">
-    <div class="col-md-4">
+    <div class="col-md-4 pb-3">
       <img src="{{ static_url_for('static', filename='build/img/about_me_pic_2.jpg') }}" class="rounded img-fluid" alt="A picture of me holding my dog Mia"/>
     </div>
     <div class="col-md-8">

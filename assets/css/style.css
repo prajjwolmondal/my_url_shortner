@@ -104,3 +104,7 @@ footer .footer-nav {
   width:auto;
   height:500px;
 }
+
+img {
+  max-width: 100%;
+}
