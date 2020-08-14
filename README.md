@@ -14,4 +14,5 @@ My focus on this project was to try out technologies that I didn't try out in th
 - [pytest](https://docs.pytest.org/en/latest/) - used for the unit tests
 - [circleci](circleci.com/) - the CI for this project. I saw CircleCI mentioned on a lot of job postings so I decided to check it out. I love the [debug with ssh](https://circleci.com/docs/2.0/ssh-access-jobs/) feature.
 - [docker](https://www.docker.com/)
+- [unDraw](https://undraw.co/) - provided all of the gorgeous illustrations used in this site. Thanks a lot!
 - [bootstrap](https://getbootstrap.com/) - for the site styling
