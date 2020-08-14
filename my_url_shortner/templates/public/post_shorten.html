@@ -14,7 +14,7 @@
         <div class="row py-4">
             <div class="col-md">
                 <div class="input-group" id="center-text">
-                    <input id="url-to-copy" class="form-control form-control-lg" value="http://127.0.0.1:5000/url/{{ request.args.get('urlKey') }}" size="6" readonly>
+                    <input id="url-to-copy" class="form-control form-control-lg" value="https://short-url-95.herokuapp.com/url/{{ request.args.get('urlKey') }}" size="6" readonly>
                     <div class="input-group-append">
                         <!-- TODO: Make this button copy to clipboard -->
                         <button class="btn btn-secondary" type="button" id="copy-to-clipboard-btn" data-clipboard-action="copy" data-clipboard-target="#url-to-copy">Copy link</button>
