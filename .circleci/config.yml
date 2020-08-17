@@ -80,8 +80,8 @@ workflows:
             branches:
               only: master
       - heroku/deploy-via-git:
-        requires:
-          - hold_for_approval
-        filters:
-          branches:
-            only: master
+          requires:
+            - hold_for_approval
+          filters:
+            branches:
+              only: master
