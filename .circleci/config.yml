@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.3.2
+  heroku: circleci/heroku@1.2.1
 
 executors:
   docker-with-sql:
@@ -64,10 +65,31 @@ jobs:
       - run: pytest -v
 
 workflows:
-  main:
+  build_and_test_for_prs:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              ignore: master
       - test:
           context: url_shortner_main_context
           requires:
             - build
+
+  build_and_deploy_for_master:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - test:
+          context: url_shortner_main_context
+          requires:
+            - build
+      - hold_for_approval:
+          type: approval
+          requires:
+            - test
+      - heroku/deploy-via-git:
+          requires:
+            - hold_for_approval
