@@ -73,7 +73,7 @@ workflows:
           requires:
             - build
       - hold_for_approval:
-          type: hold_for_approval
+          type: approval
           requires:
             - test
           filters:
