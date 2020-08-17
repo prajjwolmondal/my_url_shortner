@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.3.2
+  heroku: circleci/heroku@1.2.1
 
 executors:
   docker-with-sql:
@@ -71,3 +72,16 @@ workflows:
           context: url_shortner_main_context
           requires:
             - build
+      - hold_for_approval:
+          type: hold_for_approval
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
+      - heroku/deploy-via-git:
+        requires:
+          - hold_for_approval
+        filters:
+          branches:
+            only: master
