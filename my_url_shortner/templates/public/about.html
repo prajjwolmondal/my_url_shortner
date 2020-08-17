@@ -33,8 +33,13 @@
           used for the unit tests. Even though I worked as a Software Engineer in Test at Ritual for roughly two years, I never wrote a single unit test till I got laid off. It was something I really wanted to know before I started a position elsewhere, so these days I'm writing unit tests for any project that I do. pytest came highly recommended on online forums and sites, and so far in my experience it's been pretty easy to grasp. I only have some basic tests written out right now, but am planning on adding some more tests later once the FE is done.
         </li>
         <li class="py-2">
-          <a href="circleci.com/">CircleCI</a> - 
-          the CI for this project. I saw CircleCI mentioned on a lot of job postings so I decided to check it out. I love the <a href="https://circleci.com/docs/2.0/ssh-access-jobs/">debug with ssh</a> feature. So far in this project, I've used it twice to quickly figure out what was going wrong with the pipeline. In the end, it took me about 30 tries in a day, to get the initial pipeline up and running but it was great feeling to see commit messages and PRs with a green checkmark next to it. Will be adding more to the pipelines, such as lint checking, deploying to AWS/Azure/GCP, having auto tags when master is updated, etc.
+          <p>
+            <a href="circleci.com/">CircleCI</a> - 
+            the CI for this project. I saw CircleCI mentioned on a lot of job postings so I decided to check it out. I love the <a href="https://circleci.com/docs/2.0/ssh-access-jobs/">debug with ssh</a> feature. So far in this project, I've used it twice to quickly figure out what was going wrong with the pipeline. In the end, it took me about 30 tries in a day, to get the initial pipeline up and running but it was great feeling to see commit messages and PRs with a green checkmark next to it.
+          </p>
+          <p>
+            I've addded two workflows, one for pull requests(build_and_test_for_prs) and another for when master is updated(build_and_deploy_for_master). The build_and_test_for_prs workflow, just builds the app and runs the tests whereas the build_and_deploy_for_master workflow, builds, tests, and then waits for manual approval before deploying the app on Heroku.
+          </p>
         </li>
         <li class="py-2">
           <a href="https://getbootstrap.com/">Bootstrap</a> - 
@@ -71,7 +76,7 @@
         Besides traveling and cooking, I'm also a huge fan of music, movies and tv shows. I probably spend 80% of my time awake listening to music. I mostly listen to hip hop with a healthy dose of rock, R&B, electronic and synthwave. I watch a lot of TV/movies with my partner, we recently just finished another re-watch of Community (cause why not, its streets ahead).
       </p>
       <p>
-        I'm also a huge gamer. Since childhood, games have been a huge part of my life and I still enjoy spending large amounts of time on them. Recently, I've gotten really into No Man's Sky and before that I finished Halo 3 on PC. 
+        I'm also a huge gamer. Since childhood, games have been a huge part of my life and I still enjoy spending large amounts of time on them. Recently, I've gotten really into Fall Guys and No Man's Sky and before that I finished Halo 3 on PC. 
       </p>
     </div>
   </div>
