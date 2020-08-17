@@ -50,7 +50,7 @@ venv/
 /node_modules/
 
 # webpack-built files
-/my_url_shortner/static/build/
+/my_url_shortner/static/
 
 # Configuration
 .env
