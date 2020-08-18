@@ -90,7 +90,6 @@ workflows:
           type: approval
           requires:
             - test
-      - heroku/install:
+      - heroku/deploy-via-git:
           requires:
             - hold_for_approval
-      - heroku/deploy-via-git          
