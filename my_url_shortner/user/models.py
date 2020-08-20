@@ -2,6 +2,8 @@
 """User models."""
 import datetime as dt
 
+from uuid import uuid4
+
 from flask_login import UserMixin
 
 from my_url_shortner.database import (
@@ -34,6 +36,8 @@ class User(UserMixin, Model):
             self.set_password(password)
         else:
             self.password = None
+        
+        self.user_id = uuid4()
 
     def set_password(self, password):
         """Set password."""

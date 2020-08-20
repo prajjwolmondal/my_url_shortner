@@ -28,8 +28,9 @@ def register():
             password=register_form.password.data,
             active=True,
         )
-        flash("Thank you for registering. You can now log in.", "success")
-        return redirect(url_for("user.signinPage"))
+        login_user(User.query.filter_by(username=register_form.username.data).first())
+        flash("Thank you for registering. You have been logged in.", "success")
+        return redirect(url_for("main.home"))
     else:
         flash_errors(register_form)
     return render_template("public/register.html", loginForm=login_form, registerForm=register_form)
