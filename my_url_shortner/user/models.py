@@ -6,7 +6,7 @@ from flask_login import UserMixin
 
 from my_url_shortner.database import (
     Column,
-    PkModel,
+    Model,
     db,
     reference_col,
     relationship,
@@ -14,36 +14,18 @@ from my_url_shortner.database import (
 from my_url_shortner.extensions import bcrypt
 
 
-class Role(PkModel):
-    """A role for a user."""
-
-    __tablename__ = "roles"
-    name = Column(db.String(80), unique=True, nullable=False)
-    user_id = reference_col("users", nullable=True)
-    user = relationship("User", backref="roles")
-
-    def __init__(self, name, **kwargs):
-        """Create instance."""
-        super().__init__(name=name, **kwargs)
-
-    def __repr__(self):
-        """Represent instance as a unique string."""
-        return f"<Role({self.name})>"
-
-
-class User(UserMixin, PkModel):
+class User(UserMixin, Model):
     """A user of the app."""
 
     __tablename__ = "users"
-    username = Column(db.String(80), unique=True, nullable=False)
-    email = Column(db.String(80), unique=True, nullable=False)
-    #: The hashed password
-    password = Column(db.LargeBinary(128), nullable=True)
-    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+    user_id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    username = Column(db.String(40), unique=True, nullable=False)
+    email = Column(db.String(60), unique=True, nullable=False)
+    password = Column(db.LargeBinary(128), nullable=False)   # The hashed password
     first_name = Column(db.String(30), nullable=True)
-    last_name = Column(db.String(30), nullable=True)
-    active = Column(db.Boolean(), default=False)
-    is_admin = Column(db.Boolean(), default=False)
+    last_name = Column(db.String(45), nullable=True)
+    active = Column(db.Boolean(), nullable=False, default=True)
+    created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
 
     def __init__(self, username, email, password=None, **kwargs):
         """Create instance."""
@@ -60,6 +42,9 @@ class User(UserMixin, PkModel):
     def check_password(self, value):
         """Check password."""
         return bcrypt.check_password_hash(self.password, value)
+
+    def get_id(self):
+        return self.username
 
     @property
     def full_name(self):
