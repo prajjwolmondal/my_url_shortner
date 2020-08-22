@@ -2,8 +2,6 @@
 """User models."""
 import datetime as dt
 
-from uuid import uuid4
-
 from flask_login import UserMixin
 
 from my_url_shortner.database import (
@@ -20,7 +18,7 @@ class User(UserMixin, Model):
     """A user of the app."""
 
     __tablename__ = "users"
-    user_id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
+    user_id = db.Column(db.String(32), primary_key=True) # primary keys are required by SQLAlchemy
     username = Column(db.String(40), unique=True, nullable=False)
     email = Column(db.String(60), unique=True, nullable=False)
     password = Column(db.LargeBinary(128), nullable=False)   # The hashed password
@@ -37,8 +35,6 @@ class User(UserMixin, Model):
         else:
             self.password = None
         
-        self.user_id = uuid4()
-
     def set_password(self, password):
         """Set password."""
         self.password = bcrypt.generate_password_hash(password)

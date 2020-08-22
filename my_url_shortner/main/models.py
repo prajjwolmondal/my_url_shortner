@@ -16,6 +16,7 @@ class UrlList(Model):
     short_code = Column(db.String(6), unique=True, nullable=False, primary_key=True)
     full_url = Column(db.String(120), nullable=False)
     created_at = Column(db.DateTime, nullable=False, default=dt.datetime.utcnow)
+    created_by = Column(db.String(32), nullable=False)
 
     def __repr__(self) -> str:
         """Represent instance as a unique string."""

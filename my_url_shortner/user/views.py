@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, current_app, flash, redirect, render_template, request, url_for
+from flask import Blueprint, current_app, flash, redirect, render_template, request, session, url_for
 from flask_login import login_user
 
 from .forms import LoginForm, RegisterForm
 from .models import User
 from my_url_shortner.utils import flash_errors
+
+from uuid import uuid4
 
 blueprint = Blueprint("user", __name__, url_prefix="/users", static_folder="../static")
 
@@ -22,12 +24,15 @@ def register():
     register_form = RegisterForm(request.form)
     login_form = LoginForm()
     if register_form.validate_on_submit():
+        generated_user_id = uuid4()
         User.create(
             username=register_form.username.data,
             email=register_form.email.data,
             password=register_form.password.data,
             active=True,
+            user_id = generated_user_id,
         )
+        session['user_id'] = generated_user_id
         login_user(User.query.filter_by(username=register_form.username.data).first())
         flash("Thank you for registering. You have been logged in.", "success")
         return redirect(url_for("main.home"))
@@ -43,6 +48,7 @@ def login():
         user = User.query.filter_by(username=login_form.username.data).first()
         current_app.logger.info(f"username: {login_form.username.data}")
         current_app.logger.info(f"user: {user}")
+        session['user_id'] = user.user_id
         login_user(user)
         flash("You are logged in.", "success")
         return redirect(url_for("main.home"))

@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 from .models import User
 
+import re
 
 class RegisterForm(FlaskForm):
     """Register form."""
@@ -34,15 +35,39 @@ class RegisterForm(FlaskForm):
         initial_validation = super(RegisterForm, self).validate()
         if not initial_validation:
             return False
-        user = User.query.filter_by(username=self.username.data).first()
-        if user:
-            self.username.errors.append(f"{user.username} already registered")
+        if not self.validate_user_name():
             return False
-        user = User.query.filter_by(email=self.email.data).first()
-        if user:
-            self.email.errors.append(f"{user.email} already registered")
+        if not self.validate_user_email():
+            return False
+        if not self.validate_pwd():
             return False
         return True
+
+    def validate_user_name(self):
+        user = User.query.filter_by(username=self.username.data).first()
+        if user:
+            self.username.errors.append(f"{user.username} has already been registered")
+            return False
+        return True
+    
+    def validate_user_email(self):
+        user = User.query.filter_by(email=self.email.data).first()
+        if user:
+            self.email.errors.append(f"{user.email} has already been registered")
+            return False
+        return True
+
+    def validate_pwd(self):
+        """Passwords need to be at least 8 chars long, have a letter, number and special char"""
+
+        # Thanks to https://stackoverflow.com/a/2990682 for the regex
+        if re.fullmatch(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
+                        self.password.data):
+            return True
+        else:
+            self.password.errors.append(f"Your password doesn't match the requirements.")
+            return False
+        
 
 class LoginForm(FlaskForm):
     """Login form."""

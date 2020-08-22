@@ -20,10 +20,12 @@
                     <div class="form-group">
                         {{registerForm.password.label}}
                         {{registerForm.password(placeholder="Password", class_="form-control")}}
+                        <small id="passwordHelp" class="form-text text-muted">Passwords need to be at least 8 characters long, have a letter, number and one of: @$!%*#?&</small>
                     </div>
                     <div class="form-group">
                         {{registerForm.confirm.label}}
                         {{registerForm.confirm(placeholder="Password (again)", class_="form-control")}}
+                        <small id="emailHelp" class="form-text text-muted">Must match the password you entered in the previous field</small>
                     </div>
                     <p><input class="btn btn-primary" type="submit" value="Register"></p>
             </form>
