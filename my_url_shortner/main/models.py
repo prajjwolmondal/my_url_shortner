@@ -23,4 +23,4 @@ class UrlList(Model):
         return f"<Url_key({self.short_code})>"
 
     def convert_to_dict(self) -> dict:
-        return {'short_code': self.short_code, 'full_url': self.full_url}
+        return {'short_code': self.short_code, 'full_url': self.full_url, 'created_at': self.created_at, 'created_by': self.created_by}

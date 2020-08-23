@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """User views."""
-from flask import Blueprint, current_app, flash, redirect, render_template, request, session, url_for
-from flask_login import login_user
+from flask import Blueprint, current_app, flash, jsonify, redirect, render_template, request, session, url_for
+from flask_login import login_user, login_required
 
 from .forms import LoginForm, RegisterForm
 from .models import User
+
+from my_url_shortner.main.models import UrlList
 from my_url_shortner.utils import flash_errors
 
 from uuid import uuid4
@@ -55,3 +57,22 @@ def login():
     else:
         flash_errors(login_form)
     return render_template("public/register.html", loginForm=login_form, registerForm=register_form)
+
+def getAllUrlsForLoggedInUser():
+    """Get all URLs associated with current logged in user"""
+    user_id = session['user_id']
+    urls = UrlList.query.filter_by(created_by=user_id).all()
+    url_list = []
+    for url in urls:
+        url_list.append(url.convert_to_dict())
+    return url_list
+
+@blueprint.route("/user_profile")
+@login_required
+def user_profile():
+    user_urls = getAllUrlsForLoggedInUser()
+    current_app.logger.info(f"user_urls: {user_urls}")
+    if len(user_urls) > 0:
+        return render_template("users/user_profile.html", user_urls=user_urls)
+    else:
+        return render_template("users/user_profile.html")

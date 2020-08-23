@@ -52,14 +52,6 @@ def show_success_page():
     current_app.logger.info(request.args.get('shortenURL'))
     return render_template("public/post_shorten.html", keys=request.args.get('urlKey'))
 
-@blueprint.route('/getAllUrls')
-def getAllUrls():
-    urls = UrlList.query.all()
-    url_list = []
-    for url in urls:
-        url_list.append(url.convert_to_dict())
-    return jsonify(url_list)
-
 @blueprint.route('/url/<short_code>')
 def redirectToFullUrl(short_code):
     url = UrlList.query.get(short_code)
