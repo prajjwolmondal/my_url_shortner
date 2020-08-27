@@ -27,12 +27,18 @@ def shortenURL(url: str) -> dict:
     url_without_special_chars = re.sub('(^(https|http)|\W+)', '', url)
     for i in range(0, 6):
         url_key += url_without_special_chars[randint(0, len(url_without_special_chars)-1)]
-    current_app.logger.info(f"session['user_id'] - {session['user_id']}")
+    if session.get("user_id") == True:
+        current_app.logger.info(f"session['user_id'] - {session['user_id']}")
+        UrlList.create(
+            short_code=url_key.upper(),
+            full_url=url,
+            created_by=session['user_id']
+        )
     UrlList.create(
-        short_code=url_key.upper(),
-        full_url=url,
-        created_by=session['user_id']
-    )
+            short_code=url_key.upper(),
+            full_url=url,
+            created_by=None
+        )
     return {'original_url': url, 'key': url_key.upper()}
 
 @blueprint.route("/", methods=["GET", "POST"])
