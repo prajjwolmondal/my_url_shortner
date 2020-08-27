@@ -8,9 +8,9 @@ CREATE TABLE urllist (
 );
 
 INSERT INTO url_shortcodes.urllist
-(short_code, full_url, created_at)
+(short_code, full_url, created_at, created_by)
 VALUES('ILAMMO', 'https://www.linkedin.com/in/prajjwolmondal/', '2020-08-07 03:46:12.0', None);
 
 INSERT INTO url_shortcodes.urllist
-(short_code, full_url, created_at)
+(short_code, full_url, created_at, created_by)
 VALUES('ULOTIG', 'https://github.com/prajjwolmondal/', '2020-07-28 03:50:14.0', None);
