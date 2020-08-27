@@ -104,3 +104,8 @@ footer .footer-nav {
   width:auto;
   height:500px;
 }
+
+#RegisterCol {
+  border-right: 1px solid #999999;
+
+}

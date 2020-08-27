@@ -1,0 +1,40 @@
+
+{% extends "layout.html" %}
+{% block content %}
+    <div class="container my-5">
+        <div class="row align-items-center justify-content-center">
+            <h1 class="display-4">Welcome {{ current_user.username }}</h1>
+        </div>
+        {% if user_urls is not defined %}
+            <div class="row align-items-center justify-content-center pt-5">
+                <img src="{{ static_url_for('static', filename='build/img/undraw_empty.svg') }}" 
+                 class="rounded img-fluid" alt="An illustration of a person holding an empty box."
+                 width="50%" height="50%"/>
+            </div>
+            <div class="row align-items-center justify-content-center">
+                <h3 class="display-5">Looks like you haven't shortened any URLs yet</h3>
+            </div>
+        {% else %}
+            <div class="row align-items-center justify-content-center">
+                <h3 class="display-5">Here are all the URLs you've shortened:</h3>
+            </div>
+            <div class="row align-items-center justify-content-center py-3">
+                <table class="table table-hover">
+                    <caption>Table listing all the URLs you've shortened</caption>
+                    <tr>
+                        <th>URL shortcode</th>
+                        <th>Full URL</th>
+                        <th>Created at</th>
+                    </tr>
+                    {% for url in user_urls %}
+                        <tr>
+                            <td>{{ url.short_code }}</td>
+                            <td>{{ url.full_url }}</td>
+                            <td>{{ url.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

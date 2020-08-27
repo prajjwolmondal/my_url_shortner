@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import url_for, request
-
 from my_url_shortner.main.models import UrlList
-
-from .factories import UrlFactory
 
 
 class TestUrlFunctionality:
@@ -25,17 +21,7 @@ class TestUrlFunctionality:
         res = testapp.get('/url/ULOTIG', status=[302])
         assert res.headers['Location'] == "https://github.com/prajjwolmondal/"
 
-    def test_get_all_urls_returns_valid_status_code(self, testapp):
-        """200 status code returned when fetching all URLs"""
-        res = testapp.get('/getAllUrls')
-        assert res.status_code == 200
-
-    def test_get_all_urls_returns_more_than_one_url(self, testapp):
-        """More than 1 URL returned when fetching all URLs"""
-        res = testapp.get('/getAllUrls') 
-        assert len(res.json) > 1
-
-    def test_url_is_added_to_db(self, testapp):
+    def test_url_is_added_to_db_when_not_logged_in(self, testapp):
         """Submitting a new URL via the homepage form, adds it to the DB"""
         old_numb_of_urls = len(UrlList.query.all())
         res = testapp.get('/')

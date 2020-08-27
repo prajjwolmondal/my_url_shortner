@@ -8,6 +8,7 @@ from flask import (
     redirect,
     render_template,
     request,
+    session,
     url_for,
 )
 
@@ -26,10 +27,18 @@ def shortenURL(url: str) -> dict:
     url_without_special_chars = re.sub('(^(https|http)|\W+)', '', url)
     for i in range(0, 6):
         url_key += url_without_special_chars[randint(0, len(url_without_special_chars)-1)]
+    if session.get("user_id") == True:
+        current_app.logger.info(f"session['user_id'] - {session['user_id']}")
+        UrlList.create(
+            short_code=url_key.upper(),
+            full_url=url,
+            created_by=session['user_id']
+        )
     UrlList.create(
-        short_code=url_key.upper(),
-        full_url=url
-    )
+            short_code=url_key.upper(),
+            full_url=url,
+            created_by=None
+        )
     return {'original_url': url, 'key': url_key.upper()}
 
 @blueprint.route("/", methods=["GET", "POST"])
@@ -48,14 +57,6 @@ def home():
 def show_success_page():
     current_app.logger.info(request.args.get('shortenURL'))
     return render_template("public/post_shorten.html", keys=request.args.get('urlKey'))
-
-@blueprint.route('/getAllUrls')
-def getAllUrls():
-    urls = UrlList.query.all()
-    url_list = []
-    for url in urls:
-        url_list.append(url.convert_to_dict())
-    return jsonify(url_list)
 
 @blueprint.route('/url/<short_code>')
 def redirectToFullUrl(short_code):

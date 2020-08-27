@@ -1,31 +1,54 @@
 
 {% extends "layout.html" %}
 {% block content %}
-<div class="container-narrow">
-  <h1 class="mt-5">Register</h1>
-    <br/>
-    <form id="registerForm" class="form form-register" method="POST" action="" role="form">
-           {{ form.csrf_token }}
-            <div class="form-group">
-                {{form.username.label}}
-                {{form.username(placeholder="Username", class_="form-control")}}
+<div class="container-fluid">
+    <div class="row mx-5">
+        <div class="col-md-6" id="RegisterCol">
+            <h1 class="mt-5">Register</h1>
+            <br/>
+            <form id="registerForm" class="form form-register" method="POST" action="{{ url_for('user.register') }}" role="form">
+                {{ registerForm.csrf_token }}
+                    <div class="form-group">
+                        {{registerForm.username.label}}
+                        {{registerForm.username(placeholder="Username", class_="form-control")}}
+                    </div>
+                    <div class="form-group">
+                        {{registerForm.email.label}}
+                        {{registerForm.email(placeholder="Email", class_="form-control")}}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        {{registerForm.password.label}}
+                        {{registerForm.password(placeholder="Password", class_="form-control")}}
+                        <small id="passwordHelp" class="form-text text-muted">Passwords need to be at least 8 characters long, have a letter, number and one of: @$!%*#?&</small>
+                    </div>
+                    <div class="form-group">
+                        {{registerForm.confirm.label}}
+                        {{registerForm.confirm(placeholder="Password (again)", class_="form-control")}}
+                        <small id="emailHelp" class="form-text text-muted">Must match the password you entered in the previous field</small>
+                    </div>
+                    <p><input class="btn btn-primary" type="submit" value="Register"></p>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="container mx-5">
+                <h1 class="mt-5">Sign In</h1>
+                <br/>
+                <form id="registerForm" class="form form-register" method="POST" action="{{ url_for('user.login') }}" role="form">
+                    {{ loginForm.csrf_token }}
+                        <div class="form-group">
+                            {{loginForm.username.label}}
+                            {{loginForm.username(placeholder="Username", class_="form-control")}}
+                        </div>
+                        <div class="form-group">
+                            {{loginForm.password.label}}
+                            {{loginForm.password(placeholder="Password", class_="form-control")}}
+                        </div>
+                        <p><input class="btn btn-primary" type="submit" value="Sign In"></p>
+                </form>
             </div>
-            <div class="form-group">
-                {{form.email.label}}
-                {{form.email(placeholder="Email", class_="form-control")}}
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-            </div>
-            <div class="form-group">
-                {{form.password.label}}
-                {{form.password(placeholder="Password", class_="form-control")}}
-            </div>
-            <div class="form-group">
-                {{form.confirm.label}}
-                {{form.confirm(placeholder="Password (again)", class_="form-control")}}
-            </div>
-            <p><input class="btn btn-primary" type="submit" value="Register"></p>
-    </form>
-    <p><em>Already registered?</em> Click <a href="/">here</a> to login.</p>
+        </div>
+    </div> <!-- row -->
 </div>
 {% endblock %}
 

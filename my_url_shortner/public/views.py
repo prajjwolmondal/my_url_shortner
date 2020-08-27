@@ -12,8 +12,6 @@ from flask import (
 from flask_login import login_required, login_user, logout_user
 
 from my_url_shortner.extensions import login_manager
-from my_url_shortner.public.forms import LoginForm
-from my_url_shortner.user.forms import RegisterForm
 from my_url_shortner.user.models import User
 from my_url_shortner.utils import flash_errors
 
@@ -21,9 +19,10 @@ blueprint = Blueprint("public", __name__, static_folder="../static")
 
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_name):
     """Load user by ID."""
-    return User.get_by_id(int(user_id))
+    current_app.logger.info(f"user_name: {user_name}")
+    return User.query.filter_by(username=user_name).first()
 
 
 @blueprint.route("/logout/")
@@ -35,26 +34,7 @@ def logout():
     return redirect(url_for("main.home"))
 
 
-@blueprint.route("/register/", methods=["GET", "POST"])
-def register():
-    """Register new user."""
-    form = RegisterForm(request.form)
-    if form.validate_on_submit():
-        User.create(
-            username=form.username.data,
-            email=form.email.data,
-            password=form.password.data,
-            active=True,
-        )
-        flash("Thank you for registering. You can now log in.", "success")
-        return redirect(url_for("main.home"))
-    else:
-        flash_errors(form)
-    return render_template("public/register.html", form=form)
-
-
 @blueprint.route("/about/")
 def about():
     """About page."""
-    form = LoginForm(request.form)
-    return render_template("public/about.html", form=form)
+    return render_template("public/about.html")
