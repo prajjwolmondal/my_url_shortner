@@ -18,7 +18,7 @@ class RegisterForm(FlaskForm):
         "Email", validators=[DataRequired(), Email(), Length(min=6, max=40)]
     )
     password = PasswordField(
-        "Password", validators=[DataRequired(), Length(min=6, max=40)]
+        "Password", validators=[DataRequired(), Length(min=8, max=40)]
     )
     confirm = PasswordField(
         "Verify password",
@@ -58,14 +58,14 @@ class RegisterForm(FlaskForm):
         return True
 
     def validate_pwd(self):
-        """Passwords need to be at least 8 chars long, have a letter, number and special char"""
+        """Passwords need to be at least 8 chars long, and have a letter, number and one of: @$!%*#?&"""
 
         # Thanks to https://stackoverflow.com/a/2990682 for the regex
         if re.fullmatch(r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$',
                         self.password.data):
             return True
         else:
-            self.password.errors.append(f"Your password doesn't match the requirements.")
+            self.password.errors.append(f"Passwords need to be at least 8 chars long, and have a letter, number and one of: @$!%*#?&")
             return False
         
 
