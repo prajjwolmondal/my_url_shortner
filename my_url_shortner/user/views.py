@@ -58,8 +58,11 @@ def login():
         flash_errors(login_form)
     return render_template("public/register.html", loginForm=login_form, registerForm=register_form)
 
+@blueprint.route("/user_urls")
+@login_required
 def getAllUrlsForLoggedInUser():
     """Get all URLs associated with current logged in user"""
+    print(f"session_user: {session.keys()}")
     user_id = session['user_id']
     urls = UrlList.query.filter_by(created_by=user_id).all()
     url_list = []

@@ -3,6 +3,8 @@
 from factory import PostGenerationMethodCall, Sequence, LazyAttribute
 from factory.alchemy import SQLAlchemyModelFactory
 
+from uuid import uuid4
+
 import datetime
 
 from my_url_shortner.database import db
@@ -23,8 +25,9 @@ class UserFactory(BaseFactory):
     """User factory."""
 
     username = Sequence(lambda n: f"user{n}")
-    email = Sequence(lambda n: f"user{n}@example.com")
-    password = PostGenerationMethodCall("set_password", "example")
+    user_id = uuid4()
+    email = Sequence(lambda n: f"user{n}@unittest.com")
+    password = PostGenerationMethodCall("set_password", "test1234%")
     active = True
 
     class Meta:
