@@ -68,7 +68,7 @@ def getAllUrlsForLoggedInUser():
     url_list = []
     for url in urls:
         url_list.append(url.convert_to_dict())
-    return url_list
+    return jsonify(url_list)
 
 @blueprint.route("/user_profile")
 @login_required

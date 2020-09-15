@@ -24,7 +24,6 @@ def app():
 
     ctx.pop()
 
-
 @pytest.fixture
 def testapp(app):
     """Create Webtest app."""
