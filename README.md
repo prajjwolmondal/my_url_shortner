@@ -1,4 +1,6 @@
-[![my_url_shortner](https://circleci.com/gh/prajjwolmondal/my_url_shortner.svg?style=shield)](https://app.circleci.com/pipelines/github/prajjwolmondal/my_url_shortner)  [![Known Vulnerabilities](https://snyk.io/test/github/prajjwolmondal/my_url_shortner/badge.svg)](https://snyk.io/test/github/prajjwolmondal/my_url_shortner)
+[![my_url_shortner](https://circleci.com/gh/prajjwolmondal/my_url_shortner.svg?style=shield)](https://app.circleci.com/pipelines/github/prajjwolmondal/my_url_shortner)  [![Known Vulnerabilities](https://snyk.io/test/github/prajjwolmondal/my_url_shortner/badge.svg)](https://snyk.io/test/github/prajjwolmondal/my_url_shortner) [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/prajjwolmondal/my_url_shortner/blob/master/LICENSE)
+
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 # My URL Shortner
 
