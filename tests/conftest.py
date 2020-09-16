@@ -24,7 +24,6 @@ def app():
 
     ctx.pop()
 
-
 @pytest.fixture
 def testapp(app):
     """Create Webtest app."""
@@ -37,13 +36,14 @@ def db(app):
     _db.app = app
     with app.app_context():
         _db.session.remove()
-        _db.drop_all()
+        # _db.drop_all()
         _db.create_all()
 
     yield _db
 
+    print("Running after yield")
     _db.session.remove()
-    _db.drop_all()
+    # _db.drop_all()
 
     ## This dispose() call is needed to avoid the DB locking
     ## between tests.
@@ -55,6 +55,7 @@ def db(app):
 @pytest.fixture
 def user(db):
     """Create user for the tests."""
-    user = UserFactory(password="myprecious")
+    user = UserFactory()
+    print(f"userfixture: {user}")
     db.session.commit()
     return user

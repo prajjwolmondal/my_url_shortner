@@ -37,6 +37,7 @@ class User(UserMixin, Model):
         
     def set_password(self, password):
         """Set password."""
+        print(f"Setting password: {password}")
         self.password = bcrypt.generate_password_hash(password)
 
     def check_password(self, value):

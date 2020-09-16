@@ -41,24 +41,6 @@ class Model(CRUDMixin, db.Model):
 
     __abstract__ = True
 
-class PkModel(Model):
-    """Base model class that includes CRUD convenience methods, plus adds a 'primary key' column named ``id``"""
-
-    __abstract__ = True
-    id = Column(db.Integer, primary_key=True)
-
-    @classmethod
-    def get_by_id(cls, record_id):
-        """Get record by ID."""
-        if any(
-            (
-                isinstance(record_id, basestring) and record_id.isdigit(),
-                isinstance(record_id, (int, float)),
-            )
-        ):
-            return cls.query.get(int(record_id))
-        return None
-
 def reference_col(
     tablename, nullable=False, pk_name="id", foreign_key_kwargs=None, column_kwargs=None
 ):
