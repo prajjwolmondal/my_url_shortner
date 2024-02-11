@@ -39,3 +39,4 @@ Flask-DebugToolbar==0.11.0
 
 # Environment variable parsing
 environs==8.0.0
+dnspython>=2.6.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
