@@ -21,7 +21,7 @@ WTForms==2.3.1
 
 # Deployment
 gevent==20.6.2
-gunicorn>=19.9.0
+gunicorn>=22.0.0
 supervisor==4.2.0
 
 # Flask Static Digest
@@ -39,3 +39,6 @@ Flask-DebugToolbar==0.11.0
 
 # Environment variable parsing
 environs==8.0.0
+idna>=3.7 # not directly required, pinned by Snyk to avoid a vulnerability
+jinja2>=3.1.4 # not directly required, pinned by Snyk to avoid a vulnerability
+mako>=1.2.2 # not directly required, pinned by Snyk to avoid a vulnerability
